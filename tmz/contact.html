@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zgh" dir="ltr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ⵜⵓⵇⵇⵏⴰ | EGAS NGO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tmz">
+    <nav class="navbar" id="navbar"><div class="container nav-container">
+        <a href="index.html" class="logo-container"><img src="../img/logo.png" alt="EGAS" class="logo-img"><div><span class="logo-text tifinagh">ⵉⴳⴰⵙ</span><span class="logo-tifinagh">EGAS</span></div></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="tifinagh">ⵜⴰⵏⵙⵙⵉⵡⵜ</a></li><li><a href="about.html" class="tifinagh">ⵎⴰⵏⵓ ⵏⵖ</a></li>
+            <li><a href="vision.html" class="tifinagh">ⵜⴰⵍⵖⵉⵡⵜ</a></li><li><a href="work.html" class="tifinagh">ⵉⵙⵡⵓⵔⵉⵏ</a></li>
+            <li><a href="projects.html" class="tifinagh">ⵉⵎⵉⵣⵣⵉⵜⵏ</a></li><li><a href="partners.html" class="tifinagh">ⵉⵣⴷⵉⵏ</a></li><li><a href="contact.html" class="active tifinagh">ⵜⵓⵇⵇⵏⴰ</a></li>
+            <li class="lang-switcher" translate="no"><a href="../ar/contact.html" class="lang-btn">AR</a><a href="../en/contact.html" class="lang-btn">EN</a><a href="contact.html" class="lang-btn current tifinagh">ⵜⵎⵣ</a></li>
+        </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    </div></nav>
+
+    <div class="page-header"><div class="container"><span class="section-badge tifinagh">ⵎⴰⵏⵉ ⵏⵍⵍⴰ</span><h1 class="tifinagh">ⵜⵓⵇⵇⵏⴰ</h1><p class="tifinagh">ⵏⵙⵙⴼⵔⴰⵃ ⵙ ⵜⵓⵇⵇⵏⴰ ⵏⵏⵓⵏ.</p></div></div>
+
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-form-box">
+                    <h3 class="tifinagh">ⵣⵣⵉⴳⵣ ⵜⴰⴱⵔⴰⵜ</h3>
+                    <form id="contactForm">
+                        <div class="form-group"><label class="form-label tifinagh">ⵉⵙⵎ ⴰⵎⴰⴷⴷⵓⴷ</label><input type="text" class="form-input" placeholder="ⵉⵙⵎ ⴰⵎⴰⴷⴷⵓⴷ" required></div>
+                        <div class="form-group"><label class="form-label tifinagh">ⴰⵏⵙⴰ ⵏ ⵜⵓⵇⵇⵏⴰ</label><input type="email" class="form-input" placeholder="example@mail.com" required></div>
+                        <div class="form-group"><label class="form-label tifinagh">ⵜⴰⴱⵔⴰⵜ</label><textarea class="form-textarea" placeholder="..." required></textarea></div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;"><i class="fas fa-paper-plane"></i> <span class="tifinagh">ⵣⵣⵉⴳⵣ ⵜⴰⴱⵔⴰⵜ</span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer><div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="../img/logo.png" alt="EGAS" class="footer-logo-img"><span class="footer-logo-text tifinagh">ⵉⴳⴰⵙ</span></a><p class="footer-desc tifinagh">ⵜⴰⵎⴷⴷⵓⵙⵜ ⵏ ⵓⵎⵓⵏ ⴳ ⵣⵓⵡⴰⵔⴰ - ⵍⵉⴱⵢⴰ.</p></div>
+        </div>
+        <div class="footer-bottom"><p class="tifinagh">&copy; 2026 ⵉⴳⴰⵙ. ⵣⵓⵡⴰⵔⴰ - ⵍⵉⴱⵢⴰ</p>
+                <p class="tifinagh" style="margin-top: 10px; font-size: 0.9em; color: var(--text-light);">ⵎⵙⴽⴰⵔ ⵏ ⵓⵙⵉⵜ ⴷ ⵓⵙⵏⴼⵍ ⵙⵖ <strong style="color: var(--accent);">ANAS IDRISI</strong></p>
+            </div>
+    </div></footer>
+
+    <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg"></span></div>
+    <script src="../js/main.js"></script>
+    <script>
+    document.getElementById('contactForm').addEventListener('submit',function(e){
+        e.preventDefault();
+        var name = this.querySelectorAll('input')[0].value;
+        var email = this.querySelectorAll('input')[1].value;
+        var message = this.querySelector('textarea').value;
+        var date = new Date().toLocaleString('ar-LY');
+
+        var msgData = { name: name, email: email, subject: 'Tamazight Contact', message: message, date: date, lang: 'Tamazight' };
+        var messages = JSON.parse(localStorage.getItem('egasMessages') || '[]');
+        messages.push(msgData);
+        localStorage.setItem('egasMessages', JSON.stringify(messages));
+
+        var t=document.getElementById('toast');
+        document.getElementById('toastMsg').textContent='ⵜⴰⴱⵔⴰⵜ ⵜⵎⵎⵓⴷⴷⴰ ⵙ ⵓⵎⵙⴰⵙⴰ!';
+        t.classList.add('show','success');
+        setTimeout(function(){t.classList.remove('show','success');},4000);
+        this.reset();
+    });
+    </script>
+</body></html>

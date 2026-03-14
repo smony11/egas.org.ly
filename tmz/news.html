@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zgh" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ⵉⵎⵉⵣⵣⵉⵜⵏ | EGAS NGO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tmz">
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="../img/logo.png" alt="EGAS Logo" class="logo-img">
+                <div>
+                    <span class="logo-text">EGAS</span>
+                    <span class="logo-tifinagh tifinagh">ⵉⴳⴰⵙ</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="tifinagh">ⵜⴰⵏⵙⵙⵉⵡⵜ</a></li>
+                <li><a href="about.html" class="tifinagh">ⵎⴰⵏⵓ ⵏⵖ</a></li>
+                <li><a href="news.html" class="active tifinagh">ⵉⵎⵉⵣⵣⵉⵜⵏ</a></li>
+                <li><a href="contact.html" class="tifinagh">ⵜⵓⵇⵇⵏⴰ</a></li>
+                <li class="lang-switcher" translate="no">
+                    <a href="../ar/news.html" class="lang-btn">AR</a>
+                    <a href="../en/news.html" class="lang-btn">EN</a>
+                    <a href="news.html" class="lang-btn current tifinagh">ⵜⵎⵣ</a>
+                </li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <span class="section-badge tifinagh">ⵉⵙⵡⵓⵔِيⵏ</span>
+            <h1 class="tifinagh">ⵉⵎⵉⵣⵣⵉⵜⵏ ⵏ ⵜⴰⵏⵙⵙⵉⵡⵜ</h1>
+            <p class="tifinagh">Follow the latest updates from EGAS in Zuwara and Libya.</p>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <section class="section">
+        <div class="container">
+            <div class="filter-container">
+                <button class="filter-tab active tifinagh" data-filter="all">ⴰⴽⴽⵯ</button>
+                <button class="filter-tab tifinagh" data-filter="عام">ⴰⵎⴰⵜⴰⵢ</button>
+                <button class="filter-tab tifinagh" data-filter="مشروع">ⵉⵎⵉⵣⵣⵉⵜⵏ</button>
+                <button class="filter-tab tifinagh" data-filter="فعالية">ⵜⵉⴳⴳⵉⵜⵉⵏ</button>
+            </div>
+
+            <div class="cards-grid" id="fullNewsGrid">
+                <!-- Loaded from LocalStorage -->
+            </div>
+            
+            <div id="emptyNewsMsg" style="display:none;text-align:center;padding:60px;color:var(--text-muted);">
+                <i class="fas fa-inbox" style="font-size:3rem;margin-bottom:20px;display:block;opacity:0.3;"></i>
+                <p class="tifinagh">ⵓⵔ ⵍⵍⵉⵏ ⵉⵎⵉⵣⵣⵉⵜⵏ.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="../img/logo.png" alt="EGAS" class="footer-logo-img"><span class="footer-logo-text tifinagh">ⵉⴳⴰⵙ</span></a><p class="footer-desc tifinagh">ⵜⴰⵎⴷⴷⵓⵙⵜ ⵏ ⵓⵎⵓⵏ ⴳ ⵣⵓⵡⴰⵔⴰ - ⵍⵉⴱⵢⴰ.</p></div>
+                <div><h4 class="footer-title tifinagh">ⵉⵙⵓⵔⵉⴼⵏ</h4><ul class="footer-links">
+                    <li><a href="index.html" class="tifinagh">ⵜⴰⵏⵙⵙⵉⵡⵜ</a></li><li><a href="about.html" class="tifinagh">ⵎⴰⵏⵓ ⵏⵖ</a></li>
+                    <li><a href="contact.html" class="tifinagh">ⵜⵓⵇⵇⵏⴰ</a></li>
+                </ul></div>
+            </div>
+            <div class="footer-bottom"><p class="tifinagh">&copy; 2026 ⵉⴳⴰⵙ. ⵣⵓⵡⴰⵔⴰ - ⵍⵉⴱⵢⴰ</p>
+                <p class="tifinagh" style="margin-top: 10px; font-size: 0.9em; color: var(--text-light);">ⵎⵙⴽⴰⵔ ⵏ ⵓⵙⵉⵜ ⴷ ⵓⵙⵏⴼⵍ ⵙⵖ <strong style="color: var(--accent);">ANAS IDRISI</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var news = JSON.parse(localStorage.getItem('egasNews') || '[]');
+            var grid = document.getElementById('fullNewsGrid');
+            var empty = document.getElementById('emptyNewsMsg');
+            var tmzNews = news.filter(function(n){ return n.lang === 'ⵜⴰⵎⴰⵣⵉⵖⵜ' || n.lang === 'All'; });
+            
+            var icons = { 'عام': 'fa-newspaper', 'مشروع': 'fa-project-diagram', 'فعالية': 'fa-calendar-star', 'إعلان': 'fa-bullhorn' };
+
+            function renderNews(filter) {
+                var filtered = filter === 'all' ? tmzNews : tmzNews.filter(n => n.category === filter);
+                
+                if (filtered.length === 0) {
+                    grid.style.display = 'none';
+                    empty.style.display = 'block';
+                } else {
+                    grid.style.display = 'grid';
+                    empty.style.display = 'none';
+                    grid.innerHTML = filtered.slice().reverse().map(function(n) {
+                        var icon = icons[n.category] || 'fa-newspaper';
+                        var displayCat = n.category === 'عام' ? 'ⴰⵎⴰⵜⴰⵢ' : (n.category === 'مشروع' ? 'ⵉⵎⵉⵣⵣⵉⵜⵏ' : (n.category === 'فعالية' ? 'ⵜⵉⴳⴳⵉⵜⵉⵏ' : (n.category === 'إعلان' ? 'ⴰⴱⵔⵔⴰⵃ' : n.category)));
+                        var imgHtml = n.image ? '<div class="card-img-news" style="height:180px;overflow:hidden;border-radius:var(--radius);margin-bottom:15px;"><img src="' + n.image + '" alt="' + n.title + '" style="width:100%;height:100%;object-fit:cover;"></div>' : '';
+                        return '<div class="card" data-cat="' + n.category + '">' + imgHtml +
+                               '<div class="card-icon" style="' + (n.image ? 'display:none;' : '') + '"><i class="fas ' + icon + '"></i></div>' +
+                               '<span class="tifinagh" style="font-size:0.75rem;font-weight:800;text-transform:uppercase;color:var(--accent);">' + displayCat + '</span>' +
+                               '<h3 class="card-title tifinagh" style="margin-top:8px;">' + n.title + '</h3>' +
+                               '<p class="card-desc tifinagh">' + (n.content ? n.content.substring(0, 150) + (n.content.length > 150 ? '...' : '') : '') + '</p>' +
+                               '<p style="font-size:0.8rem;color:var(--text-light);margin-top:16px;font-weight:600;"><i class="fas fa-calendar" style="margin-left:6px;color:var(--accent);"></i>' + n.date + '</p>' +
+                               '</div>';
+                    }).join('');
+                }
+            }
+
+            renderNews('all');
+
+            document.querySelectorAll('.filter-tab').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderNews(this.getAttribute('data-filter'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>

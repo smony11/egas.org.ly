@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم | EGAS NGO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="admin-body rtl">
+<div class="admin-sidebar" id="adminSidebar">
+<div class="admin-sidebar-logo">
+<img src="../img/logo.png" alt="EGAS">
+<span>EGAS Admin</span>
+</div>
+<nav class="admin-nav">
+<div class="admin-nav-section">الرئيسيه</div>
+<a href="dashboard.html" class="admin-nav-link active"><i class="fas fa-home"></i> لوحة التحكم</a>
+<div class="admin-nav-section">المحتوى</div>
+<a href="#" class="admin-nav-link" id="navNews"><i class="fas fa-newspaper"></i> الأخبار والمنشورات</a>
+<a href="#" class="admin-nav-link" id="navProjects"><i class="fas fa-project-diagram"></i> المشاريع</a>
+<a href="#" class="admin-nav-link" id="navPartners"><i class="fas fa-handshake"></i> الشركاء</a>
+<a href="#" class="admin-nav-link" id="navMessages"><i class="fas fa-envelope"></i> الرسائل الواردة</a>
+<div class="admin-nav-section">النظام</div>
+<a href="../ar/index.html" class="admin-nav-link" target="_blank"><i class="fas fa-external-link-alt"></i> عرض الموقع</a>
+<a href="login.html" class="admin-nav-link" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+</nav>
+</div>
+
+<div class="admin-main" id="adminMain">
+<div class="admin-topbar">
+<div style="display:flex;align-items:center;gap:12px;">
+<button id="sidebarToggle" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--primary-dark);"><i class="fas fa-bars"></i></button>
+<h2>لوحة تحكم EGAS</h2>
+</div>
+<div style="display:flex;align-items:center;gap:14px;">
+<span style="font-size:0.9rem;color:var(--text-muted);">مرحباً، <strong>Admin</strong></span>
+<div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;"><i class="fas fa-user" style="color:var(--primary-dark);"></i></div>
+</div>
+</div>
+
+<div class="admin-content" id="adminContent">
+
+<!-- Dashboard Main View -->
+<div id="viewDashboard">
+<div class="admin-stats-grid">
+<div class="stat-card"><div class="stat-card-icon yellow"><i class="fas fa-newspaper"></i></div><div class="stat-card-info"><h3 id="countNews">0</h3><p>الأخبار والمنشورات</p></div></div>
+<div class="stat-card"><div class="stat-card-icon blue"><i class="fas fa-project-diagram"></i></div><div class="stat-card-info"><h3 id="countProjects">0</h3><p>المشاريع</p></div></div>
+<div class="stat-card"><div class="stat-card-icon green"><i class="fas fa-handshake"></i></div><div class="stat-card-info"><h3 id="countPartners">0</h3><p>الشركاء</p></div></div>
+<div class="stat-card" onclick="showView('messages')" style="cursor:pointer;"><div class="stat-card-icon red"><i class="fas fa-envelope"></i></div><div class="stat-card-info"><h3 id="countMessages">0</h3><p>الرسائل الواردة</p></div></div>
+</div>
+
+<div class="admin-card">
+<div class="admin-card-header">
+<h3><i class="fas fa-bolt" style="color:var(--accent-warm);margin-left:8px;"></i> إجراءات سريعة</h3>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
+<button class="admin-btn admin-btn-primary" onclick="showView('news')" style="padding:16px;flex-direction:column;gap:8px;border-radius:var(--radius);font-size:0.9rem;">
+<i class="fas fa-plus-circle" style="font-size:1.5rem;"></i> إضافة خبر جديد
+</button>
+<button class="admin-btn admin-btn-primary" onclick="showView('projects')" style="padding:16px;flex-direction:column;gap:8px;border-radius:var(--radius);font-size:0.9rem;">
+<i class="fas fa-plus-circle" style="font-size:1.5rem;"></i> إضافة مشروع
+</button>
+<button class="admin-btn admin-btn-primary" onclick="showView('partners')" style="padding:16px;flex-direction:column;gap:8px;border-radius:var(--radius);font-size:0.9rem;">
+<i class="fas fa-plus-circle" style="font-size:1.5rem;"></i> إضافة شريك
+</button>
+</div>
+</div>
+
+<div class="admin-card">
+<div class="admin-card-header">
+<h3><i class="fas fa-newspaper" style="color:var(--accent-warm);margin-left:8px;"></i> آخر الأخبار</h3>
+<button class="admin-btn admin-btn-primary" onclick="showView('news')"><i class="fas fa-eye"></i> عرض الكل</button>
+</div>
+<div id="recentNewsList" style="display:flex;flex-direction:column;gap:12px;"></div>
+<div id="noNewsMsg" style="text-align:center;padding:30px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:2rem;margin-bottom:10px;display:block;color:var(--text-light);"></i>لا يوجد أخبار بعد. أضف أول خبر!</div>
+</div>
+</div>
+
+<!-- News View -->
+<div id="viewNews" style="display:none;">
+<div class="admin-card">
+<div class="admin-card-header">
+<h3><i class="fas fa-newspaper" style="color:var(--accent-warm);margin-left:8px;"></i> الأخبار والمنشورات</h3>
+<button class="admin-btn admin-btn-primary" onclick="showAddNews()"><i class="fas fa-plus"></i> إضافة خبر</button>
+</div>
+<div id="newsList"></div>
+</div>
+</div>
+
+<!-- Projects View -->
+<div id="viewProjects" style="display:none;">
+<div class="admin-card">
+<div class="admin-card-header">
+<h3><i class="fas fa-project-diagram" style="color:var(--accent-warm);margin-left:8px;"></i> المشاريع</h3>
+<button class="admin-btn admin-btn-primary" onclick="showAddProject()"><i class="fas fa-plus"></i> إضافة مشروع</button>
+</div>
+<div id="projectsList"></div>
+</div>
+</div>
+
+<!-- Partners View -->
+<div id="viewPartners" style="display:none;">
+    <div class="admin-card">
+        <div class="admin-card-header">
+            <h3><i class="fas fa-handshake" style="color:var(--accent-warm);margin-left:8px;"></i> الشركاء</h3>
+            <button class="admin-btn admin-btn-primary" onclick="showAddPartner()"><i class="fas fa-plus"></i> إضافة شريك</button>
+        </div>
+        <div id="partnersList"></div>
+    </div>
+</div>
+
+<!-- Messages View -->
+<div id="viewMessages" style="display:none;">
+    <div class="admin-card">
+        <div class="admin-card-header">
+            <h3><i class="fas fa-envelope" style="color:var(--accent-warm);margin-left:8px;"></i> علبة الوارد</h3>
+        </div>
+        <div id="messagesList"></div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+<div class="modal">
+<div class="modal-header">
+<h3 id="modalTitle">إضافة</h3>
+<button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+</div>
+<div class="modal-body" id="modalBody"></div>
+</div>
+</div>
+
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg"></span></div>
+
+<script>
+(function(){
+if(!localStorage.getItem('egasAdmin')){window.location.href='login.html';}
+
+var data = {
+  news: JSON.parse(localStorage.getItem('egasNews')||'[]'),
+  projects: JSON.parse(localStorage.getItem('egasProjects')||'[]'),
+  partners: JSON.parse(localStorage.getItem('egasPartners')||'[]'),
+  messages: JSON.parse(localStorage.getItem('egasMessages')||'[]')
+};
+
+function save(){
+  localStorage.setItem('egasNews',JSON.stringify(data.news));
+  localStorage.setItem('egasProjects',JSON.stringify(data.projects));
+  localStorage.setItem('egasPartners',JSON.stringify(data.partners));
+  localStorage.setItem('egasMessages',JSON.stringify(data.messages));
+  updateCounts();
+}
+
+function updateCounts(){
+  document.getElementById('countNews').textContent=data.news.length;
+  document.getElementById('countProjects').textContent=data.projects.length;
+  document.getElementById('countPartners').textContent=data.partners.length;
+  document.getElementById('countMessages').textContent=data.messages.length;
+}
+updateCounts();
+
+function showToast(msg,type){
+  var t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;
+  t.className='toast show '+(type||'success');
+  setTimeout(function(){t.className='toast';},3000);
+}
+
+window.showView=function(v){
+  ['dashboard','news','projects','partners'].forEach(function(n){
+    document.getElementById('view'+n.charAt(0).toUpperCase()+n.slice(1)).style.display='none';
+  });
+  document.getElementById('view'+v.charAt(0).toUpperCase()+v.slice(1)).style.display='block';
+  document.querySelectorAll('.admin-nav-link').forEach(function(l){l.classList.remove('active');});
+  if(v==='dashboard') renderRecentNews();
+  if(v==='news') renderNews();
+  if(v==='projects') renderProjects();
+  if(v==='partners') renderPartners();
+  if(v==='messages') renderMessages();
+};
+showView('dashboard');
+
+function openModal(title,html){
+  document.getElementById('modalTitle').textContent=title;
+  document.getElementById('modalBody').innerHTML=html;
+  document.getElementById('modalOverlay').classList.add('active');
+}
+window.closeModal=function(){document.getElementById('modalOverlay').classList.remove('active');};
+
+// NEWS
+// Global Icons for categories
+var icons = { 'عام': 'fa-newspaper', 'مشروع': 'fa-project-diagram', 'فعالية': 'fa-calendar-star', 'إعلان': 'fa-bullhorn' };
+
+function renderRecentNews(){
+  var el=document.getElementById('recentNewsList');
+  var nm=document.getElementById('noNewsMsg');
+  if(data.news.length===0){el.innerHTML='';nm.style.display='block';return;}
+  nm.style.display='none';
+  var recent=data.news.slice(-3).reverse();
+  el.innerHTML=recent.map(function(n){
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--bg-off);border-radius:var(--radius);"><div><strong style="font-size:0.95rem;">'+n.title+'</strong><p style="font-size:0.8rem;color:var(--text-muted);margin:2px 0;">'+n.date+' &bull; '+n.category+'</p></div><span class="badge badge-info">'+n.lang+'</span></div>';
+  }).join('');
+}
+renderRecentNews();
+
+function renderNews(){
+  var el=document.getElementById('newsList');
+  if(data.news.length===0){el.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:2.5rem;margin-bottom:12px;display:block;color:var(--text-light);"></i>لا توجد أخبار. أضف أول خبر!</div>';return;}
+  el.innerHTML='<table class="admin-table"><thead><tr><th>العنوان</th><th>الفئة</th><th>التاريخ</th><th>اللغة</th><th>الإجراءات</th></tr></thead><tbody>'+
+  data.news.map(function(n,i){
+    var icon = icons[n.category] || 'fa-newspaper';
+    return '<tr><td><i class="fas '+icon+'" style="margin-left:8px;color:var(--accent);"></i><strong>'+n.title+'</strong></td><td>'+n.category+'</td><td>'+n.date+'</td><td><span class="badge badge-info">'+n.lang+'</span></td><td style="display:flex;gap:8px;"><button class="admin-btn admin-btn-edit" onclick="editNews('+i+')"><i class="fas fa-edit"></i></button><button class="admin-btn admin-btn-danger" onclick="deleteNews('+i+')"><i class="fas fa-trash"></i></button></td></tr>';
+  }).join('')+'</tbody></table>';
+}
+
+window.showAddNews=function(){
+  openModal('إضافة خبر جديد','<div class="form-group"><label class="form-label">عنوان الخبر</label><input class="form-input" id="nTitle" placeholder="عنوان الخبر"></div><div class="form-group"><label class="form-label">الفئة</label><select class="form-select" id="nCat"><option>عام</option><option>مشروع</option><option>فعالية</option><option>إعلان</option></select></div><div class="form-group"><label class="form-label">اللغة</label><select class="form-select" id="nLang"><option value="All">جميع اللغات / All Languages</option><option>عربي</option><option>English</option><option>ⵜⴰⵎⴰⵣⵉⵖⵜ</option></select></div><div class="form-group"><label class="form-label">رابط الصورة (اختياري)</label><input class="form-input" id="nImg" placeholder="https://..."></div><div class="form-group"><label class="form-label">محتوى الخبر</label><textarea class="form-textarea" id="nContent" placeholder="محتوى الخبر..."></textarea></div><button class="btn btn-primary" onclick="saveNews()" style="width:100%;justify-content:center;"><i class="fas fa-save"></i> حفظ الخبر</button>');
+};
+
+window.saveNews=function(){
+  var t=document.getElementById('nTitle').value;
+  if(!t){alert('أدخل عنوان الخبر');return;}
+  data.news.push({
+    title: t,
+    category: document.getElementById('nCat').value,
+    lang: document.getElementById('nLang').value,
+    image: document.getElementById('nImg').value,
+    content: document.getElementById('nContent').value,
+    date: new Date().toLocaleDateString('ar-LY')
+  });
+  save();renderNews();closeModal();showToast('تم إضافة الخبر بنجاح');
+};
+
+window.deleteNews=function(i){
+  if(confirm('هل تريد حذف هذا الخبر؟')){data.news.splice(i,1);save();renderNews();showToast('تم حذف الخبر');};
+};
+
+window.editNews=function(i){
+  var n=data.news[i];
+  openModal('تعديل الخبر','<div class="form-group"><label class="form-label">عنوان الخبر</label><input class="form-input" id="nTitle" value="'+n.title+'"></div><div class="form-group"><label class="form-label">محتوى الخبر</label><textarea class="form-textarea" id="nContent">'+n.content+'</textarea></div><button class="btn btn-primary" onclick="updateNews('+i+')" style="width:100%;justify-content:center;"><i class="fas fa-save"></i> حفظ التعديلات</button>');
+};
+window.updateNews=function(i){
+  data.news[i].title=document.getElementById('nTitle').value;
+  data.news[i].content=document.getElementById('nContent').value;
+  save();renderNews();closeModal();showToast('تم تعديل الخبر');
+};
+
+// PROJECTS
+function renderProjects(){
+  var el=document.getElementById('projectsList');
+  if(data.projects.length===0){el.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:2.5rem;margin-bottom:12px;display:block;color:var(--text-light);"></i>لا توجد مشاريع. أضف أول مشروع!</div>';return;}
+  el.innerHTML='<table class="admin-table"><thead><tr><th>اسم المشروع</th><th>المجال</th><th>الحالة</th><th>الإجراءات</th></tr></thead><tbody>'+
+  data.projects.map(function(p,i){
+    var badge=p.status==='جارٍ'?'badge-success':(p.status==='مكتمل'?'badge-info':'badge-warning');
+    return '<tr><td><strong>'+p.name+'</strong></td><td>'+p.area+'</td><td><span class="badge '+badge+'">'+p.status+'</span></td><td style="display:flex;gap:8px;"><button class="admin-btn admin-btn-danger" onclick="deleteProject('+i+')"><i class="fas fa-trash"></i></button></td></tr>';
+  }).join('')+'</tbody></table>';
+}
+
+window.showAddProject=function(){
+  openModal('إضافة مشروع','<div class="form-group"><label class="form-label">اسم المشروع</label><input class="form-input" id="pName" placeholder="اسم المشروع"></div><div class="form-group"><label class="form-label">اللغة</label><select class="form-select" id="pLang"><option value="All">جميع اللغات / All Languages</option><option>عربي</option><option>English</option><option>ⵜⴰⵎⴰⵣⵉⵖⵜ</option></select></div><div class="form-group"><label class="form-label">مجال العمل</label><select class="form-select" id="pArea"><option>الديمقراطية</option><option>الثقافة والتراث</option><option>التعليم والتدريب</option><option>التنمية المستدامة</option><option>تمكين المرأة</option></select></div><div class="form-group"><label class="form-label">الحالة</label><select class="form-select" id="pStatus"><option>جارٍ</option><option>مكتمل</option><option>مخطط له</option></select></div><div class="form-group"><label class="form-label">وصف المشروع</label><textarea class="form-textarea" id="pDesc" placeholder="وصف المشروع..."></textarea></div><button class="btn btn-primary" onclick="saveProject()" style="width:100%;justify-content:center;"><i class="fas fa-save"></i> حفظ المشروع</button>');
+};
+window.saveProject=function(){
+  var n=document.getElementById('pName').value;
+  if(!n){alert('أدخل اسم المشروع');return;}
+  data.projects.push({
+    name:n,
+    lang:document.getElementById('pLang').value,
+    area:document.getElementById('pArea').value,
+    status:document.getElementById('pStatus').value,
+    desc:document.getElementById('pDesc').value
+  });
+  save();renderProjects();closeModal();showToast('تم إضافة المشروع بنجاح');
+};
+window.deleteProject=function(i){if(confirm('حذف المشروع؟')){data.projects.splice(i,1);save();renderProjects();showToast('تم حذف المشروع');}};
+
+// PARTNERS
+function renderPartners(){
+  var el=document.getElementById('partnersList');
+  if(data.partners.length===0){el.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:2.5rem;margin-bottom:12px;display:block;color:var(--text-light);"></i>لا توجد شركاء. أضف أول شريك!</div>';return;}
+  el.innerHTML='<table class="admin-table"><thead><tr><th>الاسم</th><th>النوع</th><th>الموقع</th><th>الإجراءات</th></tr></thead><tbody>'+
+  data.partners.map(function(p,i){
+    return '<tr><td><strong>'+p.name+'</strong></td><td>'+p.type+'</td><td>'+(p.website?'<a href="'+p.website+'" target="_blank">'+p.website+'</a>':'—')+'</td><td><button class="admin-btn admin-btn-danger" onclick="deletePartner('+i+')"><i class="fas fa-trash"></i></button></td></tr>';
+  }).join('')+'</tbody></table>';
+}
+window.showAddPartner=function(){
+  openModal('إضافة شريك','<div class="form-group"><label class="form-label">اسم الشريك</label><input class="form-input" id="paName" placeholder="اسم المنظمة / المؤسسة"></div><div class="form-group"><label class="form-label">اللغة</label><select class="form-select" id="paLang"><option value="All">جميع اللغات / All Languages</option><option>عربي</option><option>English</option><option>ⵜⴰⵎⴰⵣⵉⵖⵜ</option></select></div><div class="form-group"><label class="form-label">النوع</label><select class="form-select" id="paType"><option>محلي</option><option>إقليمي</option><option>دولي</option></select></div><div class="form-group"><label class="form-label">الموقع الإلكتروني (اختياري)</label><input class="form-input" id="paWeb" placeholder="https://..."></div><button class="btn btn-primary" onclick="savePartner()" style="width:100%;justify-content:center;"><i class="fas fa-save"></i> حفظ الشريك</button>');
+};
+window.savePartner=function(){
+  var n=document.getElementById('paName').value;
+  if(!n){alert('أدخل اسم الشريك');return;}
+  data.partners.push({
+    name:n,
+    lang:document.getElementById('paLang').value,
+    type:document.getElementById('paType').value,
+    website:document.getElementById('paWeb').value
+  });
+  save();renderPartners();closeModal();showToast('تم إضافة الشريك بنجاح');
+};
+window.deletePartner=function(i){if(confirm('حذف الشريك؟')){data.partners.splice(i,1);save();renderPartners();showToast('تم حذف الشريك');}};
+
+// MESSAGES
+function renderMessages(){
+  var el=document.getElementById('messagesList');
+  if(data.messages.length===0){el.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="fas fa-inbox" style="font-size:2.5rem;margin-bottom:12px;display:block;color:var(--text-light);"></i>علبة الوارد فارغة.</div>';return;}
+  el.innerHTML='<table class="admin-table"><thead><tr><th>المرسل</th><th>الموضوع</th><th>التاريخ</th><th>اللغة</th><th>الإجراءات</th></tr></thead><tbody>'+
+  data.messages.map(function(m,i){
+    return '<tr><td><strong>'+m.name+'</strong><br><small>'+m.email+'</small></td><td>'+m.subject+'</td><td>'+m.date+'</td><td><span class="badge badge-info">'+m.lang+'</span></td><td style="display:flex;gap:8px;"><button class="admin-btn admin-btn-primary" onclick="viewMessage('+i+')"><i class="fas fa-eye"></i></button><button class="admin-btn admin-btn-danger" onclick="deleteMessage('+i+')"><i class="fas fa-trash"></i></button></td></tr>';
+  }).join('')+'</tbody></table>';
+}
+window.viewMessage=function(i){
+  var m=data.messages[i];
+  openModal('عرض الرسالة','<div style="background:var(--bg-off);padding:20px;border-radius:var(--radius);"><div style="margin-bottom:15px;"><strong>من:</strong> '+m.name+' ('+m.email+')<br><strong>التاريخ:</strong> '+m.date+'<br><strong>الموضوع:</strong> '+m.subject+'</div><div style="border-top:1px solid #eee;padding-top:15px;white-space:pre-wrap;">'+m.message+'</div></div>');
+};
+window.deleteMessage=function(i){if(confirm('هل تريد حذف هذه الرسالة؟')){data.messages.splice(i,1);save();renderMessages();showToast('تم حذف الرسالة');}};
+
+// Nav links
+document.getElementById('navNews').addEventListener('click',function(e){e.preventDefault();showView('news');this.classList.add('active');});
+document.getElementById('navProjects').addEventListener('click',function(e){e.preventDefault();showView('projects');this.classList.add('active');});
+document.getElementById('navPartners').addEventListener('click',function(e){e.preventDefault();showView('partners');this.classList.add('active');});
+document.getElementById('navMessages').addEventListener('click',function(e){e.preventDefault();showView('messages');this.classList.add('active');});
+document.getElementById('logoutBtn').addEventListener('click',function(e){e.preventDefault();localStorage.removeItem('egasAdmin');window.location.href='login.html';});
+
+// Sidebar toggle
+document.getElementById('sidebarToggle').addEventListener('click',function(){
+var sb=document.getElementById('adminSidebar');
+var main=document.getElementById('adminMain');
+sb.classList.toggle('open');
+});
+
+// Modal close on overlay click
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+})();
+</script>
+</body>
+</html>

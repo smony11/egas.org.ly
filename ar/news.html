@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جديد المنظمة | EGAS NGO</title>
+    <meta name="description" content="تابع آخر أخبار ونشاطات منظمة EGAS في زوارة وليبيا.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="rtl">
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo-container">
+                <img src="../img/logo.png" alt="EGAS Logo" class="logo-img">
+                <div>
+                    <span class="logo-text">EGAS</span>
+                    <span class="logo-tifinagh tifinagh">ⵉⴳⴰⵙ</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="about.html">من نحن</a></li>
+                <li><a href="vision.html">الرسالة والرؤية</a></li>
+                <li><a href="work.html">مجالات العمل</a></li>
+                <li><a href="projects.html">المشاريع</a></li>
+                <li><a href="partners.html">الشركاء</a></li>
+                <li><a href="contact.html">تواصل معنا</a></li>
+                <li class="lang-switcher" translate="no">
+                    <a href="news.html" class="lang-btn current">AR</a>
+                    <a href="../en/news.html" class="lang-btn">EN</a>
+                    <a href="../tmz/news.html" class="lang-btn tifinagh">ⵜⵎⵣ</a>
+                </li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <span class="section-badge">مستجداتنا</span>
+            <h1>جديد المنظمة</h1>
+            <p>تابع آخر الأخبار والمنشورات والفعاليات الخاصة بـ EGAS</p>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <section class="section">
+        <div class="container">
+            <!-- Filter Bar -->
+            <div class="filter-container">
+                <button class="filter-tab active" data-filter="all">الكل</button>
+                <button class="filter-tab" data-filter="عام">عام</button>
+                <button class="filter-tab" data-filter="مشروع">مشاريع</button>
+                <button class="filter-tab" data-filter="فعالية">فعاليات</button>
+            </div>
+
+            <div class="cards-grid" id="fullNewsGrid">
+                <!-- News items will be loaded here from LocalStorage -->
+            </div>
+            
+            <div id="emptyNewsMsg" style="display:none;text-align:center;padding:60px;color:var(--text-muted);">
+                <i class="fas fa-inbox" style="font-size:3rem;margin-bottom:20px;display:block;opacity:0.3;"></i>
+                <p>لا توجد أخبار منشورة حالياً في هذا التصنيف.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div style="position:relative;z-index:1;">
+                <h2>اشترك في <span>بريدنا</span></h2>
+                <p>ابقَ على اطلاع دائم بآخر التحركات والمبادرات التنموية في مجتمعنا.</p>
+                <a href="contact.html" class="btn btn-primary">تواصل معنا</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="../img/logo.png" alt="EGAS" class="footer-logo-img">
+                        <span class="footer-logo-text">EGAS</span>
+                    </a>
+                    <p class="footer-desc">منظمة غير حكومية تسعى لتعزيز التنمية والثقافة والديمقراطية في زوارة وليبيا.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="news.html">جديد المنظمة</a></li>
+                        <li><a href="contact.html">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">تواصل</h4>
+                    <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>egas.org@gmail.com</span></div>
+                    <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>زوارة - ليبيا</span></div>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 منظمة EGAS. جميع الحقوق محفوظة.</p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: var(--text-light);">تم تصميم وتطوير الموقع بواسطة <strong style="color: var(--accent);">ANAS IDRISI</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var news = JSON.parse(localStorage.getItem('egasNews') || '[]');
+            var grid = document.getElementById('fullNewsGrid');
+            var empty = document.getElementById('emptyNewsMsg');
+            
+            var icons = { 'عام': 'fa-newspaper', 'مشروع': 'fa-project-diagram', 'فعالية': 'fa-calendar-star', 'إعلان': 'fa-bullhorn' };
+
+            function renderNews(filter) {
+                var filtered = filter === 'all' ? news : news.filter(n => n.category === filter);
+                // Show items if language is 'عربي' OR 'All'
+                var langFiltered = filtered.filter(n => !n.lang || n.lang === 'عربي' || n.lang === 'All');
+                
+                if (langFiltered.length === 0) {
+                    grid.style.display = 'none';
+                    empty.style.display = 'block';
+                } else {
+                    grid.style.display = 'grid';
+                    empty.style.display = 'none';
+                    grid.innerHTML = filtered.slice().reverse().map(function(n) {
+                        var icon = icons[n.category] || 'fa-newspaper';
+                        return '<div class="card" data-aos="fade-up">' +
+                               '<div class="card-icon"><i class="fas ' + icon + '"></i></div>' +
+                               '<span style="font-size:0.75rem;font-weight:800;text-transform:uppercase;color:var(--accent);">' + n.category + '</span>' +
+                               '<h3 class="card-title" style="margin:10px 0;">' + n.title + '</h3>' +
+                               '<p class="card-desc">' + n.content + '</p>' +
+                               '<p style="font-size:0.8rem;color:var(--text-light);margin-top:20px;"><i class="fas fa-calendar-alt" style="margin-left:6px;color:var(--accent);"></i>' + n.date + '</p>' +
+                               '</div>';
+                    }).join('');
+                }
+            }
+
+            // Initial render
+            renderNews('all');
+
+            // Filter logic
+            document.querySelectorAll('.filter-tab').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderNews(this.getAttribute('data-filter'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>

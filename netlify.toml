@@ -1,0 +1,12 @@
+[[redirects]]
+  from = "/"
+  to = "/ar/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/index.html"
+  to = "/ar/index.html"
+  status = 200
+
+[build]
+  publish = "."
