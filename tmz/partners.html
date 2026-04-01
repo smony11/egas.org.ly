@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zgh" dir="ltr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ⵉⵣⴷⵉⵏ | EGAS NGO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tmz">
+    <nav class="navbar" id="navbar"><div class="container nav-container">
+        <a href="index.html" class="logo-container">
+            <img src="../img/logo.png" alt="EGAS Logo" class="logo-img">
+            <div>
+                <span class="logo-text">EGAS</span>
+                <span class="logo-tifinagh tifinagh">ⵉⴳⴰⵙ</span>
+            </div>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="tifinagh">ⵜⴰⵏⵙⵙⵉⵡⵜ</a></li><li><a href="about.html" class="tifinagh">ⵎⴰⵏⵓ ⵏⵖ</a></li>
+            <li><a href="vision.html" class="tifinagh">ⵜⴰⵍⵖⵉⵡⵜ</a></li><li><a href="work.html" class="tifinagh">ⵉⵙⵡⵓⵔⵉⵏ</a></li>
+            <li><a href="projects.html" class="tifinagh">ⵉⵎⵉⵣⵣⵉⵜⵏ</a></li><li><a href="partners.html" class="active tifinagh">ⵉⵣⴷⵉⵏ</a></li><li><a href="contact.html" class="tifinagh">ⵜⵓⵇⵇⵏⴰ</a></li>
+            <li class="lang-switcher"><a href="../ar/partners.html" class="lang-btn">AR</a><a href="../en/partners.html" class="lang-btn">EN</a><a href="partners.html" class="lang-btn current tifinagh">ⵜⵎⵣ</a></li>
+        </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    </div></nav>
+
+    <div class="page-header"><div class="container"><span class="section-badge tifinagh">ⵉⵎⵙⵡⴰⵍⵏ</span><h1 class="tifinagh">ⵉⵣⴷⵉⵏ</h1><p class="tifinagh">ⵏⵙⵡⵓⵔِي ⴷ ⵜⵎⴷⴷⵓⵙⵉⵏ ⵜⵉⵏⴰⵎⵓⵔⵉⵏ ⴷ ⵜⵉⵎⴰⴹⵍⴰⵏⵉⵏ.</p></div></div>
+
+    <section class="section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom:50px;">
+                <span class="section-badge tifinagh">ⵉⵣⴷⵉⵏ ⵉⵏⴰⵎⵓⵔⵏ</span>
+                <h2 class="section-title tifinagh">ⵉⵣⴷⵉⵏ <span>ⵉⵏⴰⵎⵓⵔⵏ</span></h2>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-icon-fallback"><i class="fas fa-city"></i></div>
+                    <h4 class="tifinagh">ⵜⴰⴳⵔⴰⵡⵜ ⵏ ⵣⵓⵡⴰⵔⴰ</h4>
+                    <p class="tifinagh">Municipality of Zuwara - ⵜⴰⴷⵔⴰⵡⵜ ⵜⴰⵙⵜⵔⴰⵜⵉⵊⵉⵜ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer><div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="../img/logo.png" alt="EGAS" class="footer-logo-img"><span class="footer-logo-text tifinagh">ⵉⴳⴰⵙ</span></a><p class="footer-desc tifinagh">ⵜⴰⵎⴷⴷⵓⵙⵜ ⵏ ⵓⵎⵓⵏ ⴳ ⵣⵓⵡⴰⵔⴰ - ⵍⵉⴱⵢⴰ.</p></div>
+        </div>
+        <div class="footer-bottom"><p class="tifinagh">&copy; 2026 ⵉⴳⴰⵙ. ⵣⵓⵡⴰⵔⴰ - ⵍⵉⴱⵢⴰ</p>
+                <p class="tifinagh" style="margin-top: 10px; font-size: 0.9em; color: var(--text-light);">ⵎⵙⴽⴰⵔ ⵏ ⵓⵙⵉⵜ ⴷ ⵓⵙⵏⴼⵍ ⵙⵖ <strong style="color: var(--accent);">ANAS IDRISI</strong></p>
+            </div>
+    </div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+    (function(){
+        var partners = JSON.parse(localStorage.getItem('egasPartners') || '[]');
+        var tmzPartners = partners.filter(function(p){ return p.lang === 'ⵜⴰⵎⴰⵣⵉⵖⵜ' || p.lang === 'All'; });
+        var grids = document.querySelectorAll('.partners-grid'); // 0: Local, 1: Int/Donors
+        
+        tmzPartners.forEach(function(p){
+            var card = document.createElement('div');
+            card.className = 'partner-card';
+            var icon = p.type === 'دولي' ? 'fa-globe-africa' : (p.type === 'إقليمي' ? 'fa-map-marked-alt' : 'fa-city');
+            
+            card.innerHTML = `
+                <div class="partner-icon-fallback"><i class="fas ${icon}"></i></div>
+                <h4 class="tifinagh">${p.name}</h4>
+                <p class="tifinagh">${p.website ? '<a href="'+p.website+'" target="_blank">'+p.website+'</a>' : 'ⵉⵣⴷⵉⵏ ⵉⵎⴰⴹⵍⴰⵏⵏ ⴷ ⵜⵓⵔⴳⴰ ⵏ ⵓⵎⵓⵏ.'}</p>
+            `;
+            
+            if(p.type === 'دولي' && grids[1]) {
+                grids[1].appendChild(card);
+            } else if (grids[0]) {
+                grids[0].appendChild(card);
+            }
+        });
+    })();
+    </script>
+</body></html>

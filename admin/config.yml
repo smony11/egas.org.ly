@@ -1,0 +1,78 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+collections:
+  - name: "site_data"
+    label: "قاعدة بيانات الموقع"
+    files:
+      - label: "المحتوى والإعدادات"
+        name: "data"
+        file: "content/data.json"
+        fields:
+          - label: "إعدادات الموقع"
+            name: "settings"
+            widget: "object"
+            fields:
+              - label: "بيانات التواصل"
+                name: "general"
+                widget: "object"
+                fields:
+                  - {label: "البريد الإلكتروني", name: "email", widget: "string"}
+                  - {label: "فيسبوك", name: "facebook", widget: "string"}
+                  - {label: "إنستغرام", name: "instagram", widget: "string"}
+                  - {label: "الموقع الرسمي", name: "website", widget: "string"}
+                  - {label: "اسم المطور", name: "developer", widget: "string"}
+              - label: "المحتوى العربي (AR)"
+                name: "ar"
+                widget: "object"
+                fields:
+                  - {label: "عنوان الهيرو", name: "hero_title", widget: "string"}
+                  - {label: "وصف الهيرو", name: "hero_desc", widget: "text"}
+                  - {label: "نحو نحن (ملخص)", name: "about_short", widget: "text"}
+                  - {label: "الرسالة", name: "vision", widget: "text"}
+                  - {label: "الرؤية", name: "mission", widget: "text"}
+                  - {label: "نص الفوتر", name: "footer_desc", widget: "text"}
+              - label: "English Content (EN)"
+                name: "en"
+                widget: "object"
+                fields:
+                  - {label: "Hero Title", name: "hero_title", widget: "string"}
+                  - {label: "Hero Description", name: "hero_desc", widget: "text"}
+                  - {label: "About Short", name: "about_short", widget: "text"}
+                  - {label: "Vision", name: "vision", widget: "text"}
+                  - {label: "Mission", name: "mission", widget: "text"}
+                  - {label: "Footer Text", name: "footer_desc", widget: "text"}
+          - label: "الأخبار والمنشورات"
+            name: "news"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "عنوان الخبر", name: "title", widget: "string"}
+              - {label: "الفئة", name: "category", widget: "select", options: ["عام", "مشروع", "فعالية", "إعلان"]}
+              - {label: "التاريخ", name: "date", widget: "datetime", format: "YYYY/MM/DD", date_format: "YYYY/MM/DD"}
+              - {label: "اللغة", name: "lang", widget: "select", options: ["All", "عربي", "English", "ⵜⴰⵎⴰⵣⵉⵖⵜ"]}
+              - {label: "مكان النشر", name: "publish_to", widget: "select", options: [{label: "الكل", value: "all"}, {label: "الرئيسية فقط", value: "home"}, {label: "الأخبار فقط", value: "news"}]}
+              - {label: "محتوى الخبر", name: "content", widget: "text"}
+          - label: "المشاريع"
+            name: "projects"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "اسم المشروع", name: "name", widget: "string"}
+              - {label: "مجال العمل", name: "area", widget: "select", options: ["الديمقراطية", "الثقافة والتراث", "التعليم والتدريب", "التنمية المستدامة", "تمكين المرأة"]}
+              - {label: "الحالة", name: "status", widget: "select", options: ["جارٍ", "مكتمل", "مخطط له"]}
+              - {label: "اللغة", name: "lang", widget: "select", options: ["All", "عربي", "English", "ⵜⴰⵎⴰⵣⵉⵖⵜ"]}
+              - {label: "وصف المشروع", name: "desc", widget: "text"}
+          - label: "الشركاء"
+            name: "partners"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "اسم الشريك", name: "name", widget: "string"}
+              - {label: "النوع", name: "type", widget: "select", options: ["محلي", "إقليمي", "دولي"]}
+              - {label: "الموقع الإلكتروني", name: "website", widget: "string", required: false}
+              - {label: "اللغة", name: "lang", widget: "select", options: ["All", "عربي", "English", "ⵜⴰⵎⴰⵣⵉⵖⵜ"]}

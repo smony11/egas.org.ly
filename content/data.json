@@ -1,0 +1,61 @@
+{
+  "settings": {
+    "general": {
+      "email": "egas.org@gmail.com",
+      "facebook": "https://www.facebook.com/EGAS.ngo",
+      "instagram": "https://www.instagram.com/egas.ngo",
+      "website": "https://www.egas.org.ly",
+      "developer": "ANAS IDRISI"
+    },
+    "ar": {
+      "hero_title": "المعرفة من أجل التغيير",
+      "hero_desc": "منظمة EGAS هي منظمة يقودها الشباب، تأسست لتمكين المجتمعات الأصلية والشباب والنساء من خلال التعليم والتوعية والمناصرة.",
+      "about_short": "منظمة EGAS منظمة غير ربحية مقرها مدينة زوارة بليبيا. تسعى إلى تمكين المجتمع من خلال مبادرات تعليمية وثقافية وتنموية، مؤمنةً بأن التغيير الحقيقي يبدأ من الإنسان.",
+      "vision": "تمكين المجتمع من خلال مبادرات تعليمية وثقافية وتنموية.",
+      "mission": "أن نكون المنظمة الرائدة في تعزيز التنمية المستدامة والوعي المدني.",
+      "footer_desc": "منظمة غير حكومية تسعى لتعزيز التنمية والثقافة والديمقراطية من خلال مبادرة مجتمعية هادفة ومستدامة في زوارة وليبيا."
+    },
+    "en": {
+      "hero_title": "Knowledge for Change",
+      "hero_desc": "EGAS is a youth-led organization established to empower indigenous communities, youth, and women through education, awareness, and advocacy.",
+      "about_short": "EGAS NGO is a non-profit organization based in Zuwara, Libya. It seeks to empower the community through educational, cultural, and developmental initiatives.",
+      "vision": "Empowering society through educational, cultural, and developmental initiatives.",
+      "mission": "To be the leading organization in promoting sustainable development.",
+      "footer_desc": "An NGO seeking to promote development, culture, and democracy through meaningful and sustainable community initiatives."
+    },
+    "tmz": {
+      "hero_title": "ⵜⴰⵎⵓⵙⵏⵉ ⴼⴰⴷ ⴰⴱⵔⵉⴷ",
+      "hero_desc": "...",
+      "vision": "...",
+      "mission": "...",
+      "footer_desc": "..."
+    }
+  },
+  "news": [
+    {
+      "title": "انطلاق مشروع جديد",
+      "category": "مشروع",
+      "date": "2026/04/01",
+      "lang": "عربي",
+      "publish_to": "all",
+      "content": "نحن سعداء بالإعلان عن انطلاق مشروعنا الجديد لتمكين الشباب في ليبيا."
+    }
+  ],
+  "projects": [
+    {
+      "name": "مشروع ADAM",
+      "area": "الثقافة والتراث",
+      "status": "مكتمل",
+      "lang": "عربي",
+      "desc": "رفع الوعي حول الجريمة المنظمة وتدريب الشباب على المواطنة الفاعلة وحملات المناصرة عبر الإنترنت."
+    }
+  ],
+  "partners": [
+    {
+      "name": "UNDP",
+      "type": "دولي",
+      "website": "https://www.undp.org",
+      "lang": "All"
+    }
+  ]
+}

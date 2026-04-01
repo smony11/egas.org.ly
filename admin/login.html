@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | إدارة EGAS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FFB300;
+            /* EGAS Accent Color */
+            --primary-dark: #cc8f00;
+            --surface: rgba(255, 255, 255, 0.03);
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-main: #FFFFFF;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --error: #ff4d4f;
+            --bg-dark: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            color: var(--text-main);
+        }
+
+        /* Animated Background Elements */
+        .ambient-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 179, 0, 0.15);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(56, 189, 248, 0.1);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(139, 92, 246, 0.1);
+            top: 40%;
+            left: 50%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Login Container */
+        .login-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 420px;
+            padding: 2.5rem;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--surface-border);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(255, 255, 255, 0.616);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        ..logo-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .logo-container img {
+            width: 50px;
+            height: auto;
+            filter: drop-shadow(0 4px 6px rgba(255, 255, 255, 0.3));
+            transition: transform 0.4s ease;
+            border-radius: 50%;
+        }
+
+        .logo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-container:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 1rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.1);
+        }
+
+        .form-input:focus~.input-icon,
+        .form-input:focus~.pwd-toggle {
+            color: var(--primary);
+        }
+
+        .form-group:focus-within .form-label {
+            color: var(--text-main);
+        }
+
+        .pwd-toggle {
+            position: absolute;
+            left: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .pwd-toggle:hover {
+            color: var(--text-main);
+        }
+
+        /* Error Message */
+        .login-error {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 77, 79, 0.1);
+            border: 1px solid rgba(255, 77, 79, 0.2);
+            border-radius: 10px;
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px rgba(255, 179, 0, 0.4);
+        }
+
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(255, 179, 0, 0.5);
+        }
+
+        .btn-submit:hover::after {
+            left: 200%;
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        /* Footer Hints */
+        .login-hints {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .login-hints p {
+            margin-bottom: 0.3rem;
+        }
+
+        .login-hints span {
+            color: var(--primary);
+            font-family: monospace;
+            font-size: 0.9rem;
+            background: rgba(255, 179, 0, 0.1);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            margin-right: 0.3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Ambient Background -->
+    <div class="ambient-shape shape-1"></div>
+    <div class="ambient-shape shape-2"></div>
+    <div class="ambient-shape shape-3"></div>
+
+    <div class="login-wrapper">
+        <div class="login-header">
+            <div class="logo-container">
+                <img src="../img/logo.png" alt="EGAS Logo">
+            </div>
+            <h1 class="login-title">بوابة الإدارة</h1>
+            <p class="login-subtitle">يرجى تسجيل الدخول للوصول إلى لوحة التحكم</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label" for="username">اسم المستخدم</label>
+                <div class="input-wrapper">
+                    <input type="text" class="form-input" id="username" placeholder="أدخل اسم المستخدم" required
+                        autocomplete="off">
+                    <i class="fas fa-user input-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">كلمة المرور</label>
+                <div class="input-wrapper">
+                    <input type="password" class="form-input" id="password" placeholder="أدخل كلمة المرور" required>
+                    <i class="fas fa-lock input-icon"></i>
+                    <button type="button" id="togglePwd" class="pwd-toggle" aria-label="Toggle Password Visibility">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="loginError" class="login-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>بيانات الدخول غير صحيحة، حاول مجدداً</span>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <span>تسجيل الدخول الآمن</span>
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </form>
+
+        <div class="login-hints">
+            <p>اسم المستخدم: <span>admin</span></p>
+            <p>كلمة المرور: <span>egas2026</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Password Visibility Toggle
+        document.getElementById('togglePwd').addEventListener('click', function () {
+            const pwdInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                pwdInput.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+
+        // Form Submit Handler
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const u = document.getElementById('username').value.trim();
+            const p = document.getElementById('password').value;
+            const errorMsg = document.getElementById('loginError');
+            const submitBtn = document.querySelector('.btn-submit');
+            const originalBtnHtml = submitBtn.innerHTML;
+
+            // Add loading state
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> <span>جاري التحقق...</span>';
+            submitBtn.style.opacity = '0.8';
+            submitBtn.style.pointerEvents = 'none';
+            errorMsg.style.display = 'none';
+
+            // Simulate slight network delay for premium feel
+            setTimeout(() => {
+                if (u === 'admin' && p === 'egas2026') {
+                    // Success anim
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> <span>تم الدخول بنجاح</span>';
+                    submitBtn.style.background = '#10b981'; // Success green
+
+                    localStorage.setItem('egasAdmin', 'true');
+
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 600);
+                } else {
+                    // Fail
+                    submitBtn.innerHTML = originalBtnHtml;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.pointerEvents = 'all';
+
+                    errorMsg.style.display = 'flex';
+
+                    // Reset animation
+                    errorMsg.style.animation = 'none';
+                    errorMsg.offsetHeight; // Trigger reflow
+                    errorMsg.style.animation = 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both';
+                }
+            }, 800);
+        });
+    </script>
+</body>
+
+</html>
